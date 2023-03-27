@@ -1,0 +1,27 @@
+version: "2"
+services:
+  client-demo:
+    container_name: client-demo
+    image: client-demo
+    restart: always
+    build: ./client
+    ports:
+      - "80:80"
+    links:
+      - server-demo
+      
+  server-demo:
+    container_name: server-demo
+    image: server-demo
+    restart: always
+    build: ./server
+    ports:
+      - "7500:7500"
+    links:
+      - mongo
+      
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
